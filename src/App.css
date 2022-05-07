@@ -68,7 +68,7 @@ footer a {
 
 .joinBtn:hover,
 .leaveBtn:hover {
-  background: #0ccad4;
+  background: #37e6ef;
 }
 
 .createInfo {
@@ -92,6 +92,7 @@ footer a:hover {
 .mainWrap {
   display: grid;
   grid-template-columns: 230px 1fr;
+  height: 100vh;
 }
 
 .aside {
