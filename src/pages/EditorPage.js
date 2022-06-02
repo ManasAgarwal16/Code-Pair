@@ -108,7 +108,13 @@ const EditorPage = () => {
         </button>
       </div>
       <div className='editorWrap'>
-        <Editor socketRef={socketRef} roomId={roomId} />
+        <Editor
+          socketRef={socketRef}
+          roomId={roomId}
+          onCodeChange={(code) => {
+            codeRef.current = code;
+          }}
+        />
       </div>
     </div>
   );
