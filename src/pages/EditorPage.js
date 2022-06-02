@@ -77,6 +77,10 @@ const EditorPage = () => {
     }
   }
 
+  function leaveRoom() {
+    reactNavigator('/');
+  }
+
   if (!location.state) {
     return <Navigate to='/' />;
   }
@@ -99,7 +103,9 @@ const EditorPage = () => {
         <button className='btn copyBtn' onClick={copyRoomId}>
           Copy Room ID
         </button>
-        <button className='btn leaveBtn'>Leave Room</button>
+        <button className='btn leaveBtn' onClick={leaveRoom}>
+          Leave Room
+        </button>
       </div>
       <div className='editorWrap'>
         <Editor socketRef={socketRef} roomId={roomId} />
