@@ -12,6 +12,7 @@ import Editor from '../components/Editor';
 import { initSocket } from '../socket';
 const EditorPage = () => {
   const socketRef = useRef(null);
+  const codeRef = useRef(null);
   const location = useLocation();
   const { roomId } = useParams();
   const reactNavigator = useNavigate();
@@ -42,15 +43,16 @@ const EditorPage = () => {
             console.log(`${username} joined`);
           }
           setClients(clients);
-          // socketRef.current.emit(ACTIONS.SYNC_CODE, {
-          //   code: codeRef.current,
-          //   socketId,
-          // });
+          socketRef.current.emit(ACTIONS.SYNC_CODE, {
+            code: codeRef.current,
+            socketId,
+          });
         }
       );
 
+      // Listening for disconnected
       socketRef.current.on(ACTIONS.DISCONNECTED, ({ socketId, username }) => {
-        toast.success(`${username}  left the room.`);
+        toast.success(`${username} left the room.`);
         setClients((prev) => {
           return prev.filter((client) => client.socketId !== socketId);
         });
@@ -88,7 +90,7 @@ const EditorPage = () => {
         <button className='btn leaveBtn'>Leave Room</button>
       </div>
       <div className='editorWrap'>
-        <Editor />
+        <Editor socketRef={socketRef} roomId={roomId} />
       </div>
     </div>
   );
